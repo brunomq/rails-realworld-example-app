@@ -1,0 +1,14 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: railsapp
+  namespace: default
+spec:
+  scaleRef:
+    kind: Deployment
+    name: railsapp-deployment
+    namespace: default
+  minReplicas: 3
+  maxReplicas: 10
+  cpuUtilization:
+    targetPercentage: 50

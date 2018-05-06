@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: railsapp-ingress
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - path: /  # This is the url path used to access the service externally.
+        backend:
+          serviceName: railsapp-service # This is the name of the service to be exposed.
+          servicePort: 80  # This is the port on which the service is exposed.
