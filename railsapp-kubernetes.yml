@@ -1,0 +1,70 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: railsapp-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: railsapp
+    spec:
+      containers:
+      - name: railsapp
+        image: brunoppl/rails-app
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"                                
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-counts
+spec:
+  hard:
+    configmaps: "10"
+    persistentvolumeclaims: "4"
+    replicationcontrollers: "10"
+    secrets: "10"
+    services: "10"
+    services.loadbalancers: "2"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: railsapp-service
+spec:
+  selector:
+    app: railsapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  annotations:
+  name: railsapp-deployment
+  namespace: default
+spec:
+  maxReplicas: 10
+  metrics:
+  - resource:
+      name: cpu
+      targetAverageUtilization: 65
+    type: Resource
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: railsapp-deployment
+
+
