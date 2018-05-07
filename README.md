@@ -6,7 +6,7 @@ Essa imagem de container se baseia na imagem ruby:2.2.10-slim, por se tratar de 
 
 O container está disponivel no docker hub com a tag brunoppl/rails-app, o Dockerfile da imagem está presente no repositório.
 
-A configuração do Kubernetes está disposta nos vários arquivos yaml dispostos no repositório contendo o deployment, load balancer service, horizontal pod autoscaler e resource limits. Somente não consegui ver um jeito de aplicar secrets nesa implementação. A validação dessa configuração realizei em um ambiente minikube local mas imagino que não seja problema funcionar em outro provedor.
+A configuração do Kubernetes está disposta nos vários arquivos yaml dispostos no repositório contendo o deployment, load balancer service, horizontal pod autoscaler e resource limits, há um arquivo de nome railsapp-kubernetes.yaml com a configuração unificada. Somente não consegui ver um jeito de aplicar secrets nesa implementação. A validação dessa configuração realizei em um ambiente minikube local mas imagino que não seja problema funcionar em outro provedor.
 
 
 
