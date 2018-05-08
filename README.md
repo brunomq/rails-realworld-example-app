@@ -13,7 +13,7 @@ Por praticidade disponibilizei a imagem no docker hub com a tag **brunoppl/rails
 
 Após validados o build e start do container, e feitos alguns testes usando o curl para realizar requests para a api criada por essa aplicação de acordo com a [documentação](https://github.com/gothinkster/realworld/tree/master/api) da mesma  parti para a configuração do kubernetes.
 
-#Kubernetes
+# Kubernetes
 
 Criei um cluster local usando o minikube e usando o enunciado como uma especie de checklist fui criando os itens solicitados no Kubernetes.
 Para facilitar os testes  criei os seguintes recursos como arquivos separados.
